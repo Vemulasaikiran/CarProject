@@ -3,11 +3,9 @@ package com.example.CarProject.controller;
 import com.example.CarProject.model.DealerModel;
 import com.example.CarProject.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -18,10 +16,13 @@ public class Controller {
     @Autowired
     public CarsService service;
 
-    @PostMapping("/add")
-    private void add(@RequestBody DealerModel dealerModel)
+
+    @PostMapping("/add-val")
+    private void addval(@Valid @RequestBody DealerModel dealerModel)
     {
-        service.add(dealerModel);
+         service.addval(dealerModel);
+
+//        return new dealerModel(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/get")
@@ -29,6 +30,13 @@ public class Controller {
     {
         return service.get();
     }
+
+    @DeleteMapping("/delete")
+    public void delete()
+    {
+        service.delete();
+    }
+
 
 
 }

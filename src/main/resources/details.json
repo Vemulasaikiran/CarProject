@@ -1,0 +1,22 @@
+{
+    "name":"TataMotors",
+    "address":"Gachibowli",
+    "phoneNumber":8333060236,
+    "cars":
+    [
+        {
+            "model":"Indica",
+            "color":"White",
+            "price":100000,
+            "quantity":3
+        },
+        {
+            "modelName":"Nexon",
+            "color":"red",
+            "price":1000000,
+            "quantity":5
+        }  
+    ]
+      
+    
+}

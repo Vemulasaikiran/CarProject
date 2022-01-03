@@ -1,25 +1,23 @@
-package com.example.CarProject.model;
-import java.util.List;
+package com.example.CarProject.entity;
 
-public class DealerModel {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "car_details")
+public class Dealer {
+    @Id
+    @Column
     private int id;
 
-
+    @Column
     private String name;
 
+    @Column
     private String address;
 
+    @Column
     private Integer phonenumber;
-//    private List<CarsModel> cars;
 
-
-    public DealerModel(int id, String name, String address, Integer phonenumber) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.phonenumber = phonenumber;
-    }
 
     public int getId() {
         return id;
@@ -52,15 +50,4 @@ public class DealerModel {
     public void setPhonenumber(Integer phonenumber) {
         this.phonenumber = phonenumber;
     }
-
-    //
-//    public List<CarsModel> getCars() {
-//        return cars;
-//    }
-//
-//    public void setCars(List<CarsModel> cars) {
-//        this.cars = cars;
-//    }
-
-
 }
