@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "car_details")
 public class Dealer {
     @Id
+
     @Column
     private int id;
 
