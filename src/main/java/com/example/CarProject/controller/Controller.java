@@ -5,6 +5,7 @@ import com.example.CarProject.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+//import javax.validation.Valid;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -53,13 +54,6 @@ public class Controller {
 
         return  service.replace(id, dealer);
     }
-
-
-
-
-
-
-
 
 
 

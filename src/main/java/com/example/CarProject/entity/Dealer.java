@@ -1,14 +1,21 @@
 package com.example.CarProject.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.springframework.data.jpa.repository.Query;
+
 import javax.persistence.*;
+import java.security.PrivateKey;
 
 @Entity
 @Table(name = "car_details")
 public class Dealer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY,generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
 
-    @Column
     private int id;
+
 
     @Column
     private String name;
@@ -17,7 +24,12 @@ public class Dealer {
     private String address;
 
     @Column
-    private Integer phonenumber;
+    private long phonenumber;
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "Cardetails_id")
+    private Cars cars;
+
 
 
     public int getId() {
@@ -44,11 +56,19 @@ public class Dealer {
         this.address = address;
     }
 
-    public Integer getPhonenumber() {
+    public long getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(Integer phonenumber) {
+    public void setPhonenumber(long phonenumber) {
         this.phonenumber = phonenumber;
+    }
+
+    public Cars getCars() {
+        return cars;
+    }
+
+    public void setCars(Cars cars) {
+        this.cars = cars;
     }
 }

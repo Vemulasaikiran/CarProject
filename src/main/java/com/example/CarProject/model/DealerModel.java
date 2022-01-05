@@ -1,5 +1,4 @@
 package com.example.CarProject.model;
-import java.util.List;
 
 public class DealerModel {
 
@@ -10,11 +9,12 @@ public class DealerModel {
 
     private String address;
 
-    private Integer phonenumber;
+    private long phonenumber;
+    private CarsModel cars;
 //    private List<CarsModel> cars;
 
 
-    public DealerModel(int id, String name, String address, Integer phonenumber) {
+    public DealerModel(int id, String name, String address, long phonenumber) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -45,22 +45,19 @@ public class DealerModel {
         this.address = address;
     }
 
-    public Integer getPhonenumber() {
+    public long getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhonenumber(Integer phonenumber) {
+    public void setPhonenumber(long phonenumber) {
         this.phonenumber = phonenumber;
     }
 
-    //
-//    public List<CarsModel> getCars() {
-//        return cars;
-//    }
-//
-//    public void setCars(List<CarsModel> cars) {
-//        this.cars = cars;
-//    }
+    public CarsModel getCars() {
+        return cars;
+    }
 
-
+    public void setCars(CarsModel cars) {
+        this.cars = cars;
+    }
 }

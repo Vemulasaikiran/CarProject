@@ -1,6 +1,7 @@
 package com.example.CarProject.service;
 
 
+import com.example.CarProject.entity.Cars;
 import com.example.CarProject.entity.Dealer;
 import com.example.CarProject.model.DealerModel;
 import com.example.CarProject.repository.DealerRepository;
@@ -25,10 +26,15 @@ public class CarsService {
         {
 
             Dealer det = new Dealer();
-            det.setId(dealerModel.getId());
+//            det.setId(dealerModel.getId());
             det.setName(dealerModel.getName());
             det.setAddress(dealerModel.getAddress());
             det.setPhonenumber(dealerModel.getPhonenumber());
+            Cars car = new Cars();
+            car.setModelName(dealerModel.getCars().getModelName());
+            car.setPrice(dealerModel.getCars().getPrice());
+            det.setCars(car);
+            car.setDealer(det);
             dealerRepository.save(det);
 
         }
@@ -44,7 +50,7 @@ public class CarsService {
         public List<DealerModel> getById(int id)
         {
             Optional<Dealer> details = dealerRepository.findById(id);
-            return details.stream().map(this::conversion).collect(Collectors.toList());
+            return details.stream().map(m->conversion(m)).collect(Collectors.toList());
 
         }
         public List<DealerModel> getByName(String name)
@@ -65,6 +71,7 @@ public class CarsService {
 
             data.stream().forEach(m->
             {
+                m.setId(m.getId());
                 m.setName(dealer.getName());
                 m.setPhonenumber(dealer.getPhonenumber());
                 m.setAddress(dealer.getAddress());
@@ -74,16 +81,13 @@ public class CarsService {
             return null;
         }
 
-
-
-
-
         public DealerModel conversion(Dealer dealerEntity)
         {
             return new DealerModel(dealerEntity.getId(),
                     dealerEntity.getName(),
                     dealerEntity.getAddress(),
                     dealerEntity.getPhonenumber());
+
         }
 
 
