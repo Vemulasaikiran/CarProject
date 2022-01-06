@@ -1,11 +1,11 @@
 package com.example.CarProject.entity;
 
+import com.example.CarProject.model.CarsModel;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "car_details")
@@ -26,9 +26,9 @@ public class Dealer {
     @Column
     private long phonenumber;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "Cardetails_id")
-    private Cars cars;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "CarDetails_id",referencedColumnName = "id")
+    List<Cars> cars= new ArrayList<>();
 
 
 
@@ -64,11 +64,11 @@ public class Dealer {
         this.phonenumber = phonenumber;
     }
 
-    public Cars getCars() {
+    public List<Cars> getCars(List<CarsModel> carent) {
         return cars;
     }
 
-    public void setCars(Cars cars) {
+    public void setCars(List<Cars> cars) {
         this.cars = cars;
     }
 }

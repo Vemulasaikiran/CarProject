@@ -1,6 +1,11 @@
 package com.example.CarProject.model;
 
+import com.example.CarProject.entity.Cars;
+
+import java.util.List;
+
 public class DealerModel {
+
 
     private int id;
 
@@ -10,16 +15,22 @@ public class DealerModel {
     private String address;
 
     private long phonenumber;
-    private CarsModel cars;
-//    private List<CarsModel> cars;
+//    private CarsModel cars;
+    private List<Cars> cars;
 
 
-    public DealerModel(int id, String name, String address, long phonenumber) {
-        this.id = id;
+
+
+
+
+    public DealerModel(int id, String name, String address, long phonenumber, List<Cars> cars) {
         this.name = name;
         this.address = address;
         this.phonenumber = phonenumber;
+        this.cars = cars;
     }
+
+
 
     public int getId() {
         return id;
@@ -53,11 +64,11 @@ public class DealerModel {
         this.phonenumber = phonenumber;
     }
 
-    public CarsModel getCars() {
+    public List<Cars> getCars() {
         return cars;
     }
 
-    public void setCars(CarsModel cars) {
+    public void setCars(List<Cars> cars) {
         this.cars = cars;
     }
 }

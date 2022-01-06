@@ -3,11 +3,14 @@ package com.example.CarProject.service;
 
 import com.example.CarProject.entity.Cars;
 import com.example.CarProject.entity.Dealer;
+import com.example.CarProject.model.CarsModel;
 import com.example.CarProject.model.DealerModel;
+import com.example.CarProject.repository.CarsRepository;
 import com.example.CarProject.repository.DealerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +22,9 @@ public class CarsService {
 
   @Autowired
   private DealerRepository dealerRepository;
+  @Autowired
+  private CarsRepository carsRepository;
+
 
 
 
@@ -30,11 +36,20 @@ public class CarsService {
             det.setName(dealerModel.getName());
             det.setAddress(dealerModel.getAddress());
             det.setPhonenumber(dealerModel.getPhonenumber());
-            Cars car = new Cars();
-            car.setModelName(dealerModel.getCars().getModelName());
-            car.setPrice(dealerModel.getCars().getPrice());
-            det.setCars(car);
-            car.setDealer(det);
+
+            List<Cars> carentity = new ArrayList<>();
+
+            dealerModel.getCars().stream().forEach(deal->{
+                Cars carent = new Cars();
+                carent.setModel(deal.getModel());
+                carent.setPrice(deal.getPrice());
+                carentity.add(carent);
+
+            });
+
+            det.setCars(carentity);
+
+
             dealerRepository.save(det);
 
         }
@@ -45,6 +60,7 @@ public class CarsService {
         {
         List<Dealer> details =dealerRepository.findAll();
         return details.stream().map(this::conversion).collect(Collectors.toList());
+
         }
 
         public List<DealerModel> getById(int id)
@@ -83,12 +99,21 @@ public class CarsService {
 
         public DealerModel conversion(Dealer dealerEntity)
         {
+            List<CarsModel> carent = new ArrayList<>();
+            dealerEntity.getCars(carent).stream().forEach(e->
+            {
+                CarsModel carm = new CarsModel();
+                carm.setModelName(e.getModel());
+                carm.setPrice(e.getPrice());
+                carent.add(carm);
+            });
+
             return new DealerModel(dealerEntity.getId(),
                     dealerEntity.getName(),
                     dealerEntity.getAddress(),
-                    dealerEntity.getPhonenumber());
-
+                    dealerEntity.getPhonenumber(),dealerEntity.getCars(carent));
         }
+
 
 
 
